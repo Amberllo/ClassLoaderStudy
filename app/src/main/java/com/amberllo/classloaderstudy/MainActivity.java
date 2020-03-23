@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import dalvik.system.DexClassLoader;
+import dalvik.system.PathClassLoader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         pluginFile =new File(pluginFile + "/" + apkName);
         // Step2. 创建插件的DexClassLoader
 
-        DexClassLoader dexClassLoader = new DexClassLoader(pluginFile.getAbsolutePath(), null, null, getClassLoader());
+        PathClassLoader dexClassLoader = new PathClassLoader(pluginFile.getAbsolutePath(),  getClassLoader());
         try {
             Class clazz = dexClassLoader.loadClass(clazzName);
             Toast.makeText(this, clazz.getSimpleName(), Toast.LENGTH_SHORT).show();
